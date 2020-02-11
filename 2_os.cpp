@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <cstdlib>
 
-
-
 int main()
 {
         int daylight;
