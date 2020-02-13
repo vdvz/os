@@ -1,11 +1,13 @@
 #include <sys/types.h>
+#include <sys/time.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>
-#include <stdio.h>
+
+#define MAX_LENGTH 30
 
 struct list{
     int offset;
@@ -22,9 +24,11 @@ int main (){
     int max_offset = 0;
     char str[1];
     int file_offset = 0;
+    int count_string = 0;
     while(read(dp, &str, sizeof(char))){
         file_offset++;
         if(str[0] == '\n'){
+            count_string++;
             if(max_offset<file_offset){
                 max_offset = file_offset;
             }
@@ -40,15 +44,43 @@ int main (){
     }
 
     itter->offset = file_offset;
- /* TODO parsing line from keyboard 
-    char line_number_str[10];
-    printf("Enter number of the required line: ");
-    scanf("%s", &line_number);
-    //parse
-    int line_number = 0;
-    while
-*/
-    int line_number = 2;
+
+
+int line_number;    
+////////////////////////////////////////////////////////////
+//CHECK THAT URL TO PREPAIRING: http://man7.org/linux/man-pages/man2/select.2.html
+fd_set rfds;
+struct timeval tv;
+int retval;
+
+/* Watch stdin (fd 0) to see when it has input. */
+
+FD_ZERO(&rfds);
+FD_SET(0, &rfds);
+
+/* Wait up to five seconds. */
+tv.tv_sec = 5;
+tv.tv_usec = 0;
+
+retval = select(1, &rfds, NULL, NULL, &tv);
+
+char number[MAX_LENGHT];
+if (retval == -1)
+    //ERROR WITH SELECT
+    perror("select()");
+else if (retval){
+    //GET DATA
+    lseek(0, 0L, SEEK_SET);
+    read(0, number, MAX_LENGHT);
+    line_number = atoi(number);
+}
+else //NO DATA
+    line_number =  0;
+///////////////////////////////////////////////////////////////
+
+    if(line_number > count_string){
+        line_number = 0;
+    }
 
     lseek(dp, 0L, SEEK_SET);   
     if(line_number == 0){

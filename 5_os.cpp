@@ -7,6 +7,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 
+#define MAX_LENGHT 20
+
 struct list{
     int offset;
     struct list * next;
@@ -22,9 +24,11 @@ int main (){
     int max_offset = 0;
     char str[1];
     int file_offset = 0;
+    int count_string = 0;
     while(read(dp, &str, sizeof(char))){
         file_offset++;
         if(str[0] == '\n'){
+            count_string++;
             if(max_offset<file_offset){
                 max_offset = file_offset;
             }
@@ -40,15 +44,14 @@ int main (){
     }
 
     itter->offset = file_offset;
- /* TODO parsing line from keyboard 
-    char line_number_str[10];
-    printf("Enter number of the required line: ");
-    scanf("%s", &line_number);
-    //parse
-    int line_number = 0;
-    while
-*/
-    int line_number = 2;
+    char *number[MAX_LENGHT];
+    fgets(number, MAX_LENGHT, stdin);
+
+    int line_number = atoi(number);
+    
+    if(line_number > count_string){
+        line_number = 0; 
+    }
 
     lseek(dp, 0L, SEEK_SET);   
     if(line_number == 0){
