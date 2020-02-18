@@ -4,6 +4,9 @@
 
 int main(){
 
+    //chmod g+s -> set UID, SUID when start process executing, now disable
+    // Реальный идентификатор пользователя данного процесса - идентификатор пользователя щапустившего Этот процесс
+    // Эффективный идентификатор пользователя служит для определения прав доступа к системным ресурсам (ресурсам файловой системы)
     printf("%u\n", getuid());
     printf("%u\n", geteuid());
 
@@ -14,8 +17,13 @@ int main(){
         
     }else{
         printf("Success!\n");
+        /*//chmod g+s make different uid and euid
+        printf("%u\n", getuid());
+        printf("%u\n", geteuid());    
+        */
         fclose(file);
     }
+    
     setuid(geteuid());
     
     printf("%u\n", getuid());

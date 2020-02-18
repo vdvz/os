@@ -13,7 +13,7 @@
  int main(int argc, char *argv[])
  {
      //после опций с параметрами ставится двоеточие
-     char options[ ] = "ispuU:cC:dv:V:";  /* valid options */
+     char options[ ] = "ispuU:cC:dv:V:";  /* valid options */cd 
 /*
     optarg – указатель на текущий аргумент, если таковой имеется.
     optind – индекс на следующий указатель argv, который будет обработан при следующем вызове getopt().
