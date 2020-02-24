@@ -15,14 +15,13 @@ int main(){
     node * prev_node = NULL;
     node * head = NULL;
     fgets(str, MAX_LENGHT, stdin);
-    puts(str);
     while(str[0] != '.'){
         size_t size = strlen(str);
         struct node * current = (struct node*)malloc(sizeof(struct node));
         current->string = (char*)malloc(size*sizeof(char));
-        strcpy(current->string, str);
-        puts(current->string);
-        //memcpy(current->string, str, size);
+        //strcpy(current->string, str);
+        //puts(current->string);
+        memcpy(current->string, str, size-sizeof(char));
         if(!head){
             head = current;
         }else{
