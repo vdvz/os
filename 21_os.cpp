@@ -17,7 +17,7 @@ void sigcatch(int sig){
     }
     if(sig == SIGINT){
         //TODO сделать так чтобы звук выводился при подключении по ssh 
-        putchar('\007');
+        printf("%c\n", '\07');
         count++;
     }
     signal(sig, sigcatch);
